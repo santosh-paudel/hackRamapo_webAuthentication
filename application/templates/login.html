@@ -1,49 +1,75 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 
-{{ super() }}
-	{% block content %}
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-	<script src="static/jquery.js"> </script>
-	<script src="{{url_for('static',filename='jquery.js')}}""></script>
-	<script type="text/javascript" language="javascript">
-		$(document).ready(function(){
-			$("div button:nth-child(3n)").after("<br>");
-			// $("<br>").insertAfter("#test").eq(2);
-		});
-	</script>
-	<style>
-	.center {
-    margin: auto;
-    width: 60%;
-    /*border: 3px solid #73AD21;*/
-    padding: 10px;
-	}
+    <!-- Macros -->
 
-	.btn-sq-lg {
-  width: 150px !important;
-  height: 150px !important;
-	}
-	</style>
+    <!-- Macro for displaying error messages for invalid input -->
+    {% macro with_errors(field, style) %}
+        {% if field.errors %}
+           <div class="errors">
+               {% for error in field.errors %}<div style="{{style}}">{{ error|e }}</div>{% endfor %}
+            </div>
+        {% endif %}
+    {% endmacro %}
 
-		<div class="container">
-			<div class="jumbotron">
-			
-				<form class="center" method="POST" action="/login">
-					{{form.hidden_tag() }}
-					{{ form.username.label }}<br> {{ form.username(size=30) }}<br>
-					<!-- form.select_colors has bugs. We will temporary use a bootstrap and jquery form untill it's fixed -->
-					<!-- {{ form.select_colors}} -->
-					Please select your colors:<br>
-					<div>
-					{% for items in colors %}
-					<button  type="button"  id="test" class="btn btn-sq-lg btn-default" style="background-color: {{items}}">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</button>
-					{% endfor %}
-					<div>
-					<input type="submit" value="Submit">
+    {% block content %}	
+    {{ super() }}
+    <h2 align="center">Login</h2>
 
-				</form>
-				
-			</div>
-		</div>
+    <div class="container">
+        <form class="center" method="POST" action="/login">
+            {{form.hidden_tag() }}
+
+            <!-- email field -->
+             <div class="form-group">
+                 <div class="row">
+                     <div class="col-lg-4">
+                         <div>{{ form.email.label }}: {{ form.email(class="form-control", placeholder="Email Address")  }}</div>
+                          
+                         <!-- displayed if there is a validation error -->
+                         {{ with_errors(form.email, style='font-weight: bold; color:red') }}
+                    </div>
+                 </div>
+              </div>
+            
+            <!--display the color blocks -->
+            <div class="form-group">
+                <label>Please select your colors:</label>
+                    {% for color_row in colors | batch(3) %}
+                     <div class="row">
+                         {% for color_hex, color_name in color_row %}
+                        <div class="col-lg-2">
+                            <a href="#">
+                                <div class="square {{color_name}}" style="background-color: {{color_hex}}">
+                                    <div style="display:none" id="{{color_name}}" class="glyphicon glyphicon-ok"></div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+            </div>
+
+            <!-- submit button -->
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Submit</button>
+            </div>
+
+        </form>
+        
+    </div>
 	{% endblock %}
-	
+
+    {% block head %}
+        {{ super() }}
+
+        <!-- Custom CSS File -->
+        <link rel="stylesheet" href="{{url_for('static', filename='styles/login.css')}}">
+
+        <!-- jQuery Library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <!-- Custom JavaScript -->
+        <script src= "{{url_for('static', filename='scripts/login.js')}}"></script>
+
+    {% endblock %}
+

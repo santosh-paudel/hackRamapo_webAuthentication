@@ -1,11 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import widgets
-from wtforms import StringField, SelectMultipleField
-from wtforms.validators import DataRequired
+from wtforms import widgets, StringField, SelectMultipleField
+from wtforms import validators, ValidationError
+from wtforms.fields.html5 import EmailField
+
+COLOR_CHOICES = [('1','#ff4444'),('2','#FF8800'),('3','#33b5e5'),('4','#00C851'),('5','#9933CC'),('6','#ffeb3b'),('7','#4285F4'),('8','#e91e63'),('9','#2BBBAD')]
 
 class loginForm(FlaskForm):
-	data = [(1,'#ff0000'), (2,'#d3ffce'), (3,'#ff7373'),(4,'#ffa500'),(5,'#003366'),(6,'#800080'),(7,'#00800'),(8,'#0099cc'),(9,'#ff4444')]
-	username=StringField('Please Enter Your Username',validators=[DataRequired()])
-	#for some reason, it's not working
-	#we will fix this in later versions. For now,we'll use bootstrap form
-	#select_colors = SelectMultipleField('Pick color!',choices=data,option_widget=widgets.CheckboxInput(),widget=widgets.ListWidget(prefix_label=False))
+    color=SelectMultipleField('Colors', choices=COLOR_CHOICES)
+    email=StringField('Email', [validators.DataRequired(), validators.Email()])
