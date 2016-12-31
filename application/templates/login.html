@@ -1,5 +1,22 @@
-{% extends "layout.html" %}
+<!-- This code is here temporarily -->
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  // Pass background color of the boxes as the field value of the hidden field
+    vals=[]
+    $(document).on("click","#mod",function(){
+      
+      temp=$(this).css('background-color').slice(4,-1)
+      vals.push(temp)
+      $('#color').val(vals)
 
+    })
+});
+</script>
+
+
+{% extends "layout.html" %}
     <!-- Macros -->
 
     <!-- Macro for displaying error messages for invalid input -->
@@ -34,12 +51,12 @@
             <!--display the color blocks -->
             <div class="form-group">
                 <label>Please select your colors:</label>
-                    {% for color_row in colors | batch(3) %}
+                    {% for color_row in colors.items() | batch(3) %}
                      <div class="row">
                          {% for color_hex, color_name in color_row %}
                         <div class="col-lg-2">
                             <a href="#">
-                                <div class="square {{color_name}}" style="background-color: {{color_hex}}">
+                                <div id="mod" class="square {{color_name}}" style="background-color: {{color_hex}}">
                                     <div style="display:none" id="{{color_name}}" class="glyphicon glyphicon-ok"></div>
                                 </div>
                             </a>
@@ -47,6 +64,7 @@
                         {% endfor %}
                     </div>
                     {% endfor %}
+                    {{ with_errors(form.color, style='font-weight: bold; color:red') }}
             </div>
 
             <!-- submit button -->
@@ -59,17 +77,18 @@
     </div>
 	{% endblock %}
 
-    {% block head %}
-        {{ super() }}
 
-        <!-- Custom CSS File -->
-        <link rel="stylesheet" href="{{url_for('static', filename='styles/login.css')}}">
+{% block head %}
+<!-- For some reason, this block isn't working -->
+    {{ super() }}
 
-        <!-- jQuery Library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/login.css')}}">
 
-        <!-- Custom JavaScript -->
-        <script src= "{{url_for('static', filename='scripts/login.js')}}"></script>
+    <!-- jQuery Library -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
 
-    {% endblock %}
+    <!-- Custom JavaScript -->
+    <script type="text/javascript" src= "{{url_for('static', filename='scripts/login.js')}}"></script>
 
+{% endblock %}
