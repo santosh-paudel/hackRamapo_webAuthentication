@@ -1,25 +1,3 @@
-<!-- This code is here temporarily -->
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js">
-</script>
-<script>
-$(document).ready(function(){
-  // Pass background color of the boxes as the field value of the hidden field
-    vals=[]
-    $(document).on("click","#mod",function(){
-      
-      temp=$(this).css('background-color').slice(4,-1)
-      vals.push(temp)
-      $('#color').val(vals)
-    });
-
-    $('.square').click(function () {
-        var check = $(this).attr('class').split(' ').slice(-1)[0];
-        $('#' + check).toggle();
-    });
-});
-</script>
-
-
 {% extends "layout.html" %}
     <!-- Macros -->
 

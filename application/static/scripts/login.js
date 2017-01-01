@@ -4,3 +4,10 @@ $(document).ready(function (){
         $('#' + check).toggle();
     });
 });
+
+vals=[]
+    $(document).on("click","#mod",function(){
+      temp=$(this).css('background-color').slice(4,-1)
+      vals.push(temp)
+      $('#color').val(vals)
+});
