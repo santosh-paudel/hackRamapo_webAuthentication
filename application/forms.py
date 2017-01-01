@@ -5,7 +5,7 @@ from wtforms.fields.html5 import EmailField
 
 colorHex = ['#ff4444','#ff8800','#33b5e5',
               '#00c851','#9933cc','#ffeb3b',
-              '#4285f4','#e91e63 ','#2bbbad']
+              '#4285f4','#e91e63','#2bbbad']
 
 colorName = ['red', 'orange', 'blue',
                  'green', 'puple', 'yellow',
@@ -19,23 +19,23 @@ class loginForm(FlaskForm):
 		inputs=loginForm.hash_colors(field.data)
 		print(inputs)
 		if len(inputs)!=3:
-			raise ValidationError("Only "+str(len(inputs))+" boxes chosen. Choose 3")
+			raise ValidationError(str(len(inputs))+" boxes chosen. Choose 3")
 
 		for items in inputs:
-			if items not in colorHex:
-				raise ValidationError("Unauthorized access attempted")
+			if str(items) not in colorHex:
+				raise ValidationError("Unauthorized access attempted ",items)
 
+		print(colorHex)
 	def hash_colors(data):
 		#convert all incoming rgb colors to their hex values
 		temp=list(data.split(','))
-		temp=list(map(lambda x: hex(int(x.strip()))[2:],temp))
+		temp=list(map(lambda x: '0'+hex(int(x.strip()))[2:] if len(hex(int(x.strip()))[2:])==1 else hex(int(x.strip()))[2:],temp))
+		print(temp)
 		inputs=[]
 		for items in range(0,len(temp),3):
 			cols='#'
 			for i in range(3):
 				cols+=temp[i+items]
-			if len(cols)!=7:
-				cols='0'+cols
 			inputs.append(cols)
 
 		return inputs

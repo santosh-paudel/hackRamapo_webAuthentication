@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect,url_for
 from flask_bootstrap import Bootstrap
 from forms import loginForm,colors
 app=Flask(__name__)
@@ -23,9 +23,14 @@ def login():
         print(form.email.data)
         print(form.color.data)
 
-        return "success"
+        return redirect(url_for('profile'))
 
     return render_template('login.html', form=form, colors=colors);
+
+@app.route('/profile')
+def profile():
+  return "successful"
+
 
 if __name__=='__main__':
     app.run()

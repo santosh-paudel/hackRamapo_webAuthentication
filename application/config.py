@@ -1,4 +1,3 @@
-import os
 MONGO_DBNAME='mongologinexample'
 MONGO_URL='mongodb://localhost:27017/mongologinexample'
 

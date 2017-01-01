@@ -10,8 +10,12 @@ $(document).ready(function(){
       temp=$(this).css('background-color').slice(4,-1)
       vals.push(temp)
       $('#color').val(vals)
+    });
 
-    })
+    $('.square').click(function () {
+        var check = $(this).attr('class').split(' ').slice(-1)[0];
+        $('#' + check).toggle();
+    });
 });
 </script>
 
@@ -28,7 +32,7 @@ $(document).ready(function(){
         {% endif %}
     {% endmacro %}
 
-    {% block content %}	
+    {% block content %} 
     {{ super() }}
     <h2 align="center">Login</h2>
 
@@ -75,7 +79,7 @@ $(document).ready(function(){
         </form>
         
     </div>
-	{% endblock %}
+  {% endblock %}
 
 
 {% block head %}
@@ -92,3 +96,4 @@ $(document).ready(function(){
     <script type="text/javascript" src= "{{url_for('static', filename='scripts/login.js')}}"></script>
 
 {% endblock %}
+Contact GitHub 
