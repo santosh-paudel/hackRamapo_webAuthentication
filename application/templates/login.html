@@ -15,63 +15,72 @@
     <h2 align="center">Login</h2>
 
     <div class="container">
-        <form class="center" method="POST" action="/login">
-            {{form.hidden_tag() }}
-
-            <!-- email field -->
-             <div class="form-group">
-                 <div class="row">
-                     <div class="col-lg-4">
-                         <div>{{ form.email.label }}: {{ form.email(class="form-control", placeholder="Email Address")  }}</div>
-                          
-                         <!-- displayed if there is a validation error -->
-                         {{ with_errors(form.email, style='font-weight: bold; color:red') }}
-                    </div>
-                 </div>
-              </div>
-            
-            <!--display the color blocks -->
-            <div class="form-group">
-                <label>Please select your colors:</label>
-                    {% for color_row in colors.items() | batch(3) %}
+        <div class="col-md-8">
+            <form class="center" method="POST" action="/login">
+                {{form.hidden_tag() }}
+                
+                <div class="contents">
+                <!-- email field -->
+                 <div class="form-group">
                      <div class="row">
-                         {% for color_hex, color_name in color_row %}
-                        <div class="col-lg-2">
-                            <a href="#">
-                                <div id="mod" class="square {{color_name}}" style="background-color: {{color_hex}}">
-                                    <div style="display:none" id="{{color_name}}" class="glyphicon glyphicon-ok"></div>
-                                </div>
-                            </a>
+                         <div class="col-lg-6">
+                             <div> 
+                                 <h4>Email: </h4> {{ form.email(class="form-control", placeholder="Email Address")  }}</div>
+
+                                 <!-- displayed if there is a validation error -->
+                                 {{ with_errors(form.email, style='font-weight: bold; color:red') }}
+                        </div>
+                     </div>
+                  </div>
+
+                <!--display the color blocks -->
+                <div class="form-group">
+                    <h4>Select your colors:</h4>
+                        {% for color_row in colors.items() | batch(3) %}
+                         <div class="row">
+                             {% for color_hex, color_name in color_row %}
+                            <div class="col-lg-3">
+                                <a>
+                                    <div class="square {{color_name}}" style="background-color: {{color_hex}}">
+                                        <div style="display:none" id="{{color_name}}" class="glyphicon glyphicon-ok"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
                         </div>
                         {% endfor %}
-                    </div>
-                    {% endfor %}
-                    {{ with_errors(form.color, style='font-weight: bold; color:red') }}
-            </div>
+                        {{ with_errors(form.color, style='font-weight: bold; color:red') }}
+                </div>
 
-            <!-- submit button -->
-            <div class="form-group">
-                <button class="btn btn-default" type="submit">Submit</button>
-            </div>
-
-        </form>
+                <!-- submit button -->
+                <div class="form-group">
+                    <button class="btn btn-default" type="submit">Login</button>
+                </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h4 class="question">Don't have an account?</h4>
+            <a class="sidebar" href="{{url_for('register')}}">Register now</a>
+            
+            <br>
+            <br>
+            <h4 class="question">Forgot your password?</h4>
+            <a class="sidebar" href="{{url_for('register')}}">Reset it here</a>
+        </div>
         
     </div>
   {% endblock %}
 
 
 {% block head %}
-<!-- For some reason, this block isn't working -->
     {{ super() }}
 
     <!-- Custom CSS File -->
     <link rel="stylesheet" href="{{url_for('static', filename='styles/login.css')}}">
 
-    <!-- jQuery Library -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-
     <!-- Custom JavaScript -->
     <script type="text/javascript" src= "{{url_for('static', filename='scripts/login.js')}}"></script>
 
 {% endblock %}
-Contact GitHub 

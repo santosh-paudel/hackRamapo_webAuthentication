@@ -1,5 +1,5 @@
-MONGO_DBNAME='mongologinexample'
-MONGO_URL='mongodb://localhost:27017/mongologinexample'
+MONGO_DBNAME='hackRamapo'
+MONGO_URL='mongodb://localhost:27017/hackRamapo'
 
 TWILIO_SID=os.environ.get('TWILIO_SID')
 TWILIO_AUTH_TOKEN=os.environ.get('TWILIO_AUTH_TOKEN')
