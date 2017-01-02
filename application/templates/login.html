@@ -25,7 +25,7 @@
                      <div class="row">
                          <div class="col-lg-6">
                              <div> 
-                                 <h4>Email: </h4> {{ form.email(class="form-control", placeholder="Email Address")  }}</div>
+                                 <h5>Email: </h5> {{ form.email(class="form-control", placeholder="Email Address")  }}</div>
 
                                  <!-- displayed if there is a validation error -->
                                  {{ with_errors(form.email, style='font-weight: bold; color:red') }}
@@ -35,7 +35,7 @@
 
                 <!--display the color blocks -->
                 <div class="form-group">
-                    <h4>Select your colors:</h4>
+                    <h5>Select your colors:</h5>
                         {% for color_row in colors.items() | batch(3) %}
                          <div class="row">
                              {% for color_hex, color_name in color_row %}
@@ -61,12 +61,12 @@
             </form>
         </div>
         <div class="col-md-4">
-            <h4 class="question">Don't have an account?</h4>
+            <h5 class="question">Don't have an account?</h5>
             <a class="sidebar" href="{{url_for('register')}}">Register now</a>
             
             <br>
             <br>
-            <h4 class="question">Forgot your password?</h4>
+            <h5 class="question">Forgot your password?</h5>
             <a class="sidebar" href="{{url_for('register')}}">Reset it here</a>
         </div>
         

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+    {% block content %} 
+    {{ super() }}
+        {% if current_user.is_authenticated %}
+          Hi {{ current_user.email }}!
+        {% endif %}
+    {% endblock %}
+
+    {% block head %}
+        {{ super() }}
+
+    {% endblock %}

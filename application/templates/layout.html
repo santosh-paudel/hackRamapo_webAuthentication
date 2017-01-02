@@ -17,7 +17,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{url_for('home')}}">{ home }</a></li>
                 <li><a href="#">{ about }</a></li>
-                <li><a href="{{url_for('login')}}">{ login }</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{url_for('logout')}}">{ logout }</a></li>
+                {% else %}
+                    <li><a href="{{url_for('login')}}">{ login }</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
