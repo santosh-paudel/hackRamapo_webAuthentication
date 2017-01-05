@@ -20,6 +20,20 @@
                 {{form.hidden_tag() }}
                 
                 <div class="contents">
+                <!-- name field -->
+                 <div class="form-group">
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <div> 
+                                 <h5>Name: </h5> {{ form.name(class="form-control", placeholder="Name")  }}</div>
+
+                                 <!-- displayed if there is a validation error -->
+                                 {{ with_errors(form.name, style='font-weight: bold; color:red') }}
+                        </div>
+                     </div>
+                  </div>    
+                    
+                    
                 <!-- email field -->
                  <div class="form-group">
                      <div class="row">
@@ -54,7 +68,7 @@
 
                 <!-- submit button -->
                 <div class="form-group">
-                    <button class="btn btn-default" type="submit">Login</button>
+                    <button class="btn btn-default" type="submit">Register</button>
                 </div>
                     
                 </div>

@@ -13,8 +13,36 @@ $(document).ready(function (){
         } else {
             vals.splice(index, 1);
         }
-        
         $('#color').val(vals);
+    });
+    
+    // forgot password modal
+    $("#forgot_password").click(function(){
+        $("#forgotPassword").modal({backdrop: true});
+    });
+    
+    $('#resetPwdForm').submit( function(e) {
+        var form = $(this);
+        console.log($('#resetEmail').val());
+        e.preventDefault();
+
+        data = {
+            'email': $('#resetEmail').val()
+        }
+        
+        $.ajax({
+            type: form.attr('method'),
+            data: JSON.stringify(data, null, '\t'),
+            contentType: 'application/json;charset=UTF-8',
+            url: form.attr('action'),
+            success: function(data){
+                if (data == "success") {
+                    console.log("yas");
+                    $("#forgotPassword").modal('hide');
+                    $('#success').modal({backdrop: true});
+                }  
+            }
+        });
     });
 });
 

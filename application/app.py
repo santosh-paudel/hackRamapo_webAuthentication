@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_mail import Mail
 
 app=Flask(__name__)
 
@@ -29,3 +30,14 @@ flask_bcrypt=Bcrypt(app)
 # associate flask-login with current app
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASWORD')
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['ADMINS'] = ['csilber@ramapo.edu']
+
+# sending email
+mail = Mail(app)
