@@ -7,6 +7,8 @@ from flask_bcrypt import Bcrypt
 
 app=Flask(__name__)
 
+app.config['TEMPLATE_AUTORELOAD']=True
+
 # database connection
 app.config['MONGODB_SETTINGS'] = {
     'db': 'hackRamapo',

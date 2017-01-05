@@ -1,13 +1,16 @@
 {% extends "layout.html" %}
-
     {% block content %} 
     {{ super() }}
+   
         {% if current_user.is_authenticated %}
           Hi {{ current_user.email }}!
+          <!--Temporary placeholder to check if location is working-->
+          <p id="known_location"></p>
+          <p id="unknown_location"></p>
         {% endif %}
     {% endblock %}
 
     {% block head %}
         {{ super() }}
-
+         <script type="text/javascript" src= "{{url_for('static', filename='scripts/location.js')}}"></script>
     {% endblock %}

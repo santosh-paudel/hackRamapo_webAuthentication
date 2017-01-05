@@ -1,5 +1,5 @@
 import os
-from flask import current_app, render_template, abort, request, flash, redirect, url_for
+from flask import current_app, render_template, abort, request, flash, redirect, url_for, jsonify
 from forms import loginForm, colors
 from app import login_manager, flask_bcrypt, app
 from flask_login import (current_user, login_required, login_user, logout_user, confirm_login, fresh_login_required)
@@ -34,10 +34,22 @@ def logout():
     logout_user()
     return redirect(url_for('login'));
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET','POST'])
 def profile():
+    if request.method=='POST':
+        user_location=request.form
+        for i in user_location:
+            print(i)
     return render_template('profile.html')
 
+@app.route('/location', methods=['GET','POST'])
+def location():
+    user_location=request.form
+    print('country:',user_location['country'],'city ', user_location['city'])
+    return jsonify({'country':user_location['country'],'city':user_location['city']})
+
+    return jsonify({'planet':'Unknown Planet'})
+        
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = loginForm();

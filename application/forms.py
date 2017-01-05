@@ -29,6 +29,7 @@ class loginForm(FlaskForm):
 		#print(colorHex)
         
 	def hash_colors(data):
+		#This part will need modication for hashing
 		#convert all incoming rgb colors to their hex values
 		temp=list(data.split(','))
 		temp=list(map(lambda x: '0'+hex(int(x.strip()))[2:] if len(hex(int(x.strip()))[2:])==1 else hex(int(x.strip()))[2:],temp))
