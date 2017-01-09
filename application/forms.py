@@ -19,7 +19,7 @@ def hidden_form_validation(form, field):
     inputs=hash_colors(field.data)
     #print(inputs)
     if len(inputs)!=3:
-        raise ValidationError(str(len(inputs))+" color(s chosen. Choose 3")
+        raise ValidationError(str(len(inputs))+" color(s) chosen. Choose 3")
 
     for items in inputs:
         if str(items) not in colorHex:

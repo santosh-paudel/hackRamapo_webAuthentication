@@ -12,8 +12,8 @@
 
     {% block content %} 
     {{ super() }}
-    <h2 align="center">Login</h2>
 
+    <h2 align="center">Login</h2>
     <div class="container">
         <div class="col-md-8">
             <form class="center" method="POST" action="/login">
@@ -23,7 +23,7 @@
                 <!-- email field -->
                  <div class="form-group">
                      <div class="row">
-                         <div class="col-lg-6">
+                         <div class="col-md-6 col-sm-6">
                              <div> 
                                  <h5>Email: </h5> {{ form.email(class="form-control", placeholder="Email Address")  }}</div>
 
@@ -39,7 +39,7 @@
                         {% for color_row in colors.items() | batch(3) %}
                          <div class="row">
                              {% for color_hex, color_name in color_row %}
-                            <div class="col-lg-3">
+                            <div class="col-md-3 col-sm-3 col-xs-3">
                                 <a>
                                     <div class="square {{color_name}}" style="background-color: {{color_hex}}">
                                         <div style="display:none" id="{{color_name}}" class="glyphicon glyphicon-ok"></div>
@@ -55,12 +55,13 @@
                 <!-- submit button -->
                 <div class="form-group">
                     <button class="btn btn-default" type="submit">Login</button>
+					<a class="mobile" id="forgot_password" data-target="#forgotPassword" href="#">Forgot Password?</a>
                 </div>
                     
                 </div>
             </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" id="account">
             <h5 class="question">Don't have an account?</h5>
             <a class="sidebar" href="{{url_for('register')}}">Register now</a>
             
@@ -69,7 +70,7 @@
             <h5 class="question">Forgot your password?</h5>
             <a id="forgot_password" class="sidebar" data-target="#forgotPassword" href="#">Reset it here</a>
         </div>
-        
+		
     </div>
 
     <div class="modal fade" id="forgotPassword" tabindex="-1" role="dialog">

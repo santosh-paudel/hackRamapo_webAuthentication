@@ -53,7 +53,7 @@
                         {% for color_row in colors.items() | batch(3) %}
                          <div class="row">
                              {% for color_hex, color_name in color_row %}
-                            <div class="col-lg-3">
+                            <div class="col-md-3 col-sm-3 col-xs-3">
                                 <a>
                                     <div class="square {{color_name}}" style="background-color: {{color_hex}}">
                                         <div style="display:none" id="{{color_name}}" class="glyphicon glyphicon-ok"></div>
@@ -69,12 +69,13 @@
                 <!-- submit button -->
                 <div class="form-group">
                     <button class="btn btn-default" type="submit">Register</button>
+					<a class="mobile" href="{{url_for('login')}}">Have an account?</a>
                 </div>
                     
                 </div>
             </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" id="account">
             <h5 class="question">Already have an account?</h5>
             <a class="sidebar" href="{{url_for('login')}}">Login now</a>
             

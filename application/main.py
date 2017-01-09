@@ -53,7 +53,6 @@ def location():
 
     return jsonify({'planet':'Unknown Planet'})
         
-
 @app.route('/reset', methods=['GET', 'POST'])
 def reset():
     
@@ -164,6 +163,9 @@ def confirm_email(token):
         
     return redirect(url_for('login'))
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
